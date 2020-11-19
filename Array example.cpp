@@ -2,18 +2,20 @@
 #include <ctime>
 #include <conio.h>
 
-class ArrayClass
+class Task1
 {
 public:
     static const int row = 2, col = 5;
-    int status1 = 0, status2 = 0, status3 = 0, status4 = 0, status5 = 0;
+    int status = 0, dieCount = 0;
     int dice1 = rand() % 6 + 1, dice2 = rand() % 6 + 1, dice3 = rand() % 6 + 1, dice4 = rand() % 6 + 1, dice5 = rand() % 6 + 1;
-
+    
     int diceBoard[row][col]
     {
         {dice1, dice2, dice3, dice4, dice5},
-        {status1, status2, status3, status4, status5}
+        {status, status, status, status, status}
     };
+
+    bool diceRoll = true;
 
 public:
     void arraySolution()
@@ -24,7 +26,6 @@ public:
 
     void printBoard()
     {
-
         for (int i = 0; i < row; i++)
         {
             for (int j = 0; j < col; j++)
@@ -37,36 +38,85 @@ public:
     
     void holdChoice()
     {
-        std::cout << "Please type the number of the dice you would like to reroll.\n";
-        for (int i = 0; i < col; i++)
+        while (diceRoll == true)
         {
-            switch (_getch())
+            std::cout << "\nPlease type the number of the dice you would like to reroll.\n";
+            for (int i = 0; i < col; i++)
             {
-            case '1':
-                 = 1;
-                break;
-            case '2':
-                status2 = 1;
-                break;
-            case '3':
-                status3 = 1;
-                break;
-            case '4':
-                status4 = 1;
-                break;
-            case '5':
-                status5 = 1;
+                switch (_getch())
+                {
+                case '1':
+                    diceBoard[1][0] = 1;
+                    break;
+                case '2':
+                    diceBoard[1][1] = 1;
+                    break;
+                case '3':
+                    diceBoard[1][2] = 1;
+                    break;
+                case '4':
+                    diceBoard[1][3] = 1;
+                    break;
+                case '5':
+                    diceBoard[1][4] = 1;
+                }
+                system("cls");
+                printBoard();
             }
-            system("cls");
+
+            for (int i = 0; i < col; i++)
+            {
+                if (diceBoard[1][i] == 1)
+                {
+                    diceBoard[0][i] = rand() % 6 + 1;
+
+                }
+                else if (diceBoard[1][i] == 0)
+                {
+                    dieCount++;
+                }
+                diceBoard[1][i] = 0;
+            }
+
+            std::cout << "\n";
             printBoard();
+
+            if (dieCount == col)
+            {
+                diceRoll = false;
+            }
+            else
+            {
+                dieCount = 0;
+            }
         }
+        std::cout << "\nThese are your final die. Feel free to roll again.\n\n";
+    }
+};
 
-        for (int i = 1; i < col; i++)
+class Task2
+{
+public:
+    static const int row = 4, col = 4;
+
+    int abilities[row][col]
+    {
+        {9, 21, 5, 8},
+        {1, 3, 62, 1},
+        {4, 2, 5, 8},
+        {1, 23, 6, 1},
+    };
+public:
+    void printArrayAddress()
+    {
+        std::cout << "The array's address in memory:\n";
+        for (int i = 0; i < row; i++)
         {
-            
-            
-
-            
+            for (int j = 0; j < col; j++)
+            {
+                std::cout << &abilities[i][j] << " ";
+            }
+            std::cout << "\n";
         }
     }
 };
@@ -75,7 +125,10 @@ int main()
 {
     srand(std::time(nullptr));
 
-    ArrayClass a;
-    a.arraySolution();
+    Task1 t1;
+    Task2 t2;
+
+    t1.arraySolution();
+    t2.printArrayAddress();
 }
 
