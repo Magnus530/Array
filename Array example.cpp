@@ -1,6 +1,7 @@
 #include <iostream>
 #include <ctime>
 #include <conio.h>
+#include <iomanip>
 
 class Task1
 {
@@ -107,6 +108,8 @@ public:
         {1, 23, 6, 1},
     };
 public:
+    /* One can see the next last character, increases by one for each row, and the
+    last character increase by 4 for each colum, because an integer is 4 bytes. */
     void printArrayAddress()
     {
         std::cout << "The array's address in memory:\n";
@@ -116,7 +119,7 @@ public:
             {
                 std::cout << &abilities[i][j] << " ";
             }
-            std::cout << "\n";
+            std::cout <<std::endl;
         }
     }
 };
