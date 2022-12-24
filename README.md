@@ -1,4 +1,4 @@
-# Array_example
+# Array
 
 An example of how to use arrays in C++.
 
